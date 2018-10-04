@@ -32,8 +32,7 @@ public class ProcessController {
 		return this.pRepository.save(pService);
 	}
 	
-	//@GetMapping
-	@RequestMapping(value="/getProcess", method=RequestMethod.GET)
+	@GetMapping
 	public List<ProcessEntity> getAll(){
 		return pRepository.findAll();
 	}
