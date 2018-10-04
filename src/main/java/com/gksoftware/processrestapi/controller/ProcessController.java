@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gksoftware.processrestapi.repository.ProcessRepository;
-import com.gksoftware.processrestapi.service.ProcessService;
+import com.gksoftware.processrestapi.entity.*;;
 
 @RestController
 @RequestMapping("/process")
@@ -28,18 +28,19 @@ public class ProcessController {
 	private ProcessRepository pRepository;
 	
 	@PostMapping
-	public ProcessService add(@Valid @RequestBody ProcessService pService) {
+	public ProcessEntity add(@Valid @RequestBody ProcessEntity pService) {
 		return this.pRepository.save(pService);
 	}
 	
-	@GetMapping
-	public List<ProcessService> getAll(){
+	//@GetMapping
+	@RequestMapping(value="/getProcess", method=RequestMethod.GET)
+	public List<ProcessEntity> getAll(){
 		return pRepository.findAll();
 	}
 	
 	@GetMapping("/{pid}")
-	public ResponseEntity<ProcessService> search(@PathVariable String pid){
-		ProcessService pService = pRepository.getOne(pid);
+	public ResponseEntity<ProcessEntity> search(@PathVariable String pid){
+		ProcessEntity pService = pRepository.getOne(pid);
 		if(pService == null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -47,8 +48,8 @@ public class ProcessController {
 	}
 	
 	@PutMapping("/{pid}")
-	public ResponseEntity<ProcessService> update(@PathVariable String pid, @Valid @RequestBody ProcessService pService){
-		ProcessService process = pRepository.getOne(pid);
+	public ResponseEntity<ProcessEntity> update(@PathVariable String pid, @Valid @RequestBody ProcessEntity pService){
+		ProcessEntity process = pRepository.getOne(pid);
 		if(process == null) {
 			return ResponseEntity.notFound().build();
 		}
@@ -58,8 +59,8 @@ public class ProcessController {
 	}
 	
 	@DeleteMapping("/{pid}")
-	public ResponseEntity<Void> remover(@PathVariable String pid) {
-		ProcessService process = pRepository.getOne(pid);
+	public ResponseEntity<ProcessEntity> remover(@PathVariable String pid) {
+		ProcessEntity process = pRepository.getOne(pid);
 		
 		if (process == null) {
 			return ResponseEntity.notFound().build();
@@ -68,13 +69,4 @@ public class ProcessController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	
-	
-	
-	
-	/*@RequestMapping(value="/getProcess", method=RequestMethod.GET)
-	public ProcessService getProcess() {
-		pService = new ProcessService("123", "Proceso 1", 0, "Hi i'm process one", "x", "o");
-		return pService;
-	}*/
 }

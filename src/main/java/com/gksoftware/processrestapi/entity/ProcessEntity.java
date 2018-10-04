@@ -1,18 +1,25 @@
-package com.gksoftware.processrestapi.service;
+package com.gksoftware.processrestapi.entity;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-import org.springframework.stereotype.Service;
-
-@Service
-@XmlRootElement
-public class ProcessService {
+@Entity
+public class ProcessEntity {
 	
+	@Id
 	private String pid;
+	@NotBlank
+	@NotNull
     private String name;
+	@NotNull
     private int priority;
+	@NotNull
     private String characters;
+	@NotNull
     private String charactersReplacement;
+	@NotNull
     private String charactersReplaced;
 
     public String getPid() {
@@ -63,10 +70,10 @@ public class ProcessService {
         this.characters = characters;
     }
 
-    public ProcessService() {
+    public ProcessEntity() {
     }
 
-    public ProcessService(String pid, String name, int priority, String characters, String charactersReplacement, String charactersReplaced) {
+    public ProcessEntity(String pid, String name, int priority, String characters, String charactersReplacement, String charactersReplaced) {
         this.pid = pid;
         this.name = name;
         this.priority = priority;
