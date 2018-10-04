@@ -22,7 +22,7 @@ import com.gksoftware.processrestapi.repository.ProcessRepository;
 import com.gksoftware.processrestapi.entity.*;;
 
 @RestController
-@RequestMapping(path = "/process", produces = {MediaType.APPLICATION_XML_VALUE})
+@RequestMapping("/process")
 public class ProcessController {
 	
 	@Autowired
