@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,23 +22,23 @@ import com.gksoftware.processrestapi.repository.ProcessRepository;
 import com.gksoftware.processrestapi.entity.*;;
 
 @RestController
-@RequestMapping("/process")
+@RequestMapping(path = "/process", produces = {MediaType.APPLICATION_XML_VALUE})
 public class ProcessController {
 	
 	@Autowired
 	private ProcessRepository pRepository;
 	
-	@PostMapping
+	@PostMapping(produces = {MediaType.APPLICATION_XML_VALUE})
 	public ProcessEntity add(@Valid @RequestBody ProcessEntity pService) {
 		return this.pRepository.save(pService);
 	}
 	
-	@GetMapping
+	@GetMapping(produces = {MediaType.APPLICATION_XML_VALUE})
 	public List<ProcessEntity> getAll(){
 		return pRepository.findAll();
 	}
 	
-	@GetMapping("/{pid}")
+	@GetMapping(path = "/{pid}", produces = {MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<ProcessEntity> search(@PathVariable String pid){
 		ProcessEntity pService = pRepository.getOne(pid);
 		if(pService == null) {
@@ -46,7 +47,7 @@ public class ProcessController {
 		return ResponseEntity.ok(pService);
 	}
 	
-	@PutMapping("/{pid}")
+	@PutMapping(path = "/{pid}", produces = {MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<ProcessEntity> update(@PathVariable String pid, @Valid @RequestBody ProcessEntity pService){
 		ProcessEntity process = pRepository.getOne(pid);
 		if(process == null) {
@@ -57,7 +58,7 @@ public class ProcessController {
 		return ResponseEntity.ok(process);
 	}
 	
-	@DeleteMapping("/{pid}")
+	@DeleteMapping(path = "/{pid}", produces = {MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<ProcessEntity> remover(@PathVariable String pid) {
 		ProcessEntity process = pRepository.getOne(pid);
 		
