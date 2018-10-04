@@ -1,17 +1,30 @@
 package com.gksoftware.processrestapi.service;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.stereotype.Service;
 
 @Service
 @XmlRootElement
+@Entity
 public class ProcessService {
+	
+	@Id
 	private String pid;
+	@NotBlank
+	@NotNull
     private String name;
+	@NotNull
     private int priority;
+	@NotNull
     private String characters;
+	@NotNull
     private String charactersReplacement;
+	@NotNull
     private String charactersReplaced;
 
     public String getPid() {
