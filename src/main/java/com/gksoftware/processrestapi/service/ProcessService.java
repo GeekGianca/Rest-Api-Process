@@ -1,18 +1,29 @@
 package com.gksoftware.processrestapi.service;
 
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.stereotype.Service;
 
 @Service
-@XmlRootElement
+@XmlRootElement(name = "Process")
+@XmlAccessorType(XmlAccessType.NONE)
 public class ProcessService {
 	
+	@XmlAttribute(name="pid")
 	private String pid;
+	@XmlElement(name="name")
     private String name;
+	@XmlElement(name="priority")
     private int priority;
+	@XmlElement(name="characters")
     private String characters;
+	@XmlElement(name="charactersReplacement")
     private String charactersReplacement;
+	@XmlElement(name="charactersReplaced")
     private String charactersReplaced;
 
     public String getPid() {
