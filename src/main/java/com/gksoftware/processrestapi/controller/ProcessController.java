@@ -49,7 +49,7 @@ public class ProcessController {
 	}
 	
 	@PutMapping(path = "/{pid}", produces = {MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<ProcessService> update(@PathVariable String pid, @Valid @RequestBody ProcessEntity pService){
+	public ResponseEntity<ProcessService> update(@PathVariable String pid, @Valid @RequestBody ProcessService pService){
 		ProcessService process = pRepository.getOne(pid);
 		if(process == null) {
 			return ResponseEntity.notFound().build();
