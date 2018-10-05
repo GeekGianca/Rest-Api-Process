@@ -3,11 +3,12 @@ package com.gksoftware.processrestapi.service;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.springframework.stereotype.Service;
-
+@Entity
 @Service
 @XmlRootElement(name = "Process")
 @XmlAccessorType(XmlAccessType.NONE)
