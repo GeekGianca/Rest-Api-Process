@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gksoftware.processrestapi.repository.ProcessRepository;
+import com.gksoftware.processrestapi.service.ProcessService;
 import com.gksoftware.processrestapi.entity.*;
 import com.gksoftware.processrestapi.model.Process;
 
@@ -28,6 +29,8 @@ public class ProcessController {
 	@Autowired
 	private ProcessRepository pRepository;
 	
+	private ProcessService serviceP = new ProcessService();
+	
 	@PostMapping(produces = {MediaType.APPLICATION_XML_VALUE})
 	public Process add(@Valid @RequestBody ProcessEntity pService) {
 		Process process = new Process(pService.getPid(), pService.getName(), pService.getPriority(), pService.getCharacters(), pService.getCharactersReplacement(), pService.getCharactersReplaced());
@@ -36,8 +39,9 @@ public class ProcessController {
 	}
 	
 	@GetMapping(produces = {MediaType.APPLICATION_XML_VALUE})
-	public List<ProcessEntity> getAll(){
-		return pRepository.findAll();
+	public List<Process> getAll(){
+		List<Process> listProcess = serviceP.getAllProcess(pRepository.findAll());
+		return listProcess;
 	}
 	
 	@GetMapping(path = "/{pid}", produces = {MediaType.APPLICATION_XML_VALUE})
