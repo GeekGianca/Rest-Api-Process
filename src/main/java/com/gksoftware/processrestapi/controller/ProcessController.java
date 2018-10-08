@@ -15,11 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gksoftware.processrestapi.repository.ProcessRepository;
-import com.gksoftware.processrestapi.service.ProcessService;
 import com.gksoftware.processrestapi.entity.*;
 import com.gksoftware.processrestapi.model.Process;
 
@@ -30,11 +28,11 @@ public class ProcessController {
 	@Autowired
 	private ProcessRepository pRepository;
 	
-	private ProcessService processService;
-	
 	@PostMapping(produces = {MediaType.APPLICATION_XML_VALUE})
-	public ProcessEntity add(@Valid @RequestBody ProcessEntity pService) {
-		return this.pRepository.save(pService);
+	public Process add(@Valid @RequestBody ProcessEntity pService) {
+		Process process = new Process(pService.getPid(), pService.getName(), pService.getPriority(), pService.getCharacters(), pService.getCharactersReplacement(), pService.getCharactersReplaced());
+		this.pRepository.save(pService);
+		return process;
 	}
 	
 	@GetMapping(produces = {MediaType.APPLICATION_XML_VALUE})
