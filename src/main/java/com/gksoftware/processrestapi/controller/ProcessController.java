@@ -63,14 +63,15 @@ public class ProcessController {
 	}
 	
 	@DeleteMapping(path = "/{pid}", produces = {MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<ProcessEntity> remover(@PathVariable String pid) {
-		ProcessEntity process = pRepository.getOne(pid);
-		
+	public Process remover(@PathVariable String pid) {
+		ProcessEntity pprocess = pRepository.getOne(pid);
+		Process process = serviceP.convertProcess(pprocess);
 		if (process == null) {
-			return ResponseEntity.notFound().build();
+			return null;
 		}
-		pRepository.delete(process);
-		return ResponseEntity.noContent().build();
+		pRepository.delete(pprocess);
+		ResponseEntity.noContent().build();
+		return process;
 	}
 	
 }
