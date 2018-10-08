@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement(name = "Process")
 public class ProcessEntity {
 	
 	@Id
