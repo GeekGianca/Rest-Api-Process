@@ -28,7 +28,7 @@ public class ProcessController {
 	@Autowired
 	private ProcessRepository pRepository;
 	
-	@PostMapping(produces = {MediaType.APPLICATION_XML_VALUE})
+	@PostMapping//(produces = {MediaType.APPLICATION_XML_VALUE})
 	public ProcessEntity add(@Valid @RequestBody ProcessEntity pService) {
 		return this.pRepository.save(pService);
 	}
