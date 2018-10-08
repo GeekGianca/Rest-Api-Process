@@ -33,13 +33,13 @@ public class ProcessController {
 	private ProcessService processService;
 	
 	@PostMapping(produces = {MediaType.APPLICATION_XML_VALUE})
-	public Process add(@Valid @RequestBody ProcessEntity pService) {
-		return processService.saveProcess(this.pRepository.save(pService));
+	public ProcessEntity add(@Valid @RequestBody ProcessEntity pService) {
+		return this.pRepository.save(pService);
 	}
 	
 	@GetMapping(produces = {MediaType.APPLICATION_XML_VALUE})
-	public List<Process> getAll(){
-		return processService.getAllProcess(pRepository.findAll());
+	public List<ProcessEntity> getAll(){
+		return pRepository.findAll();
 	}
 	
 	@GetMapping(path = "/{pid}", produces = {MediaType.APPLICATION_XML_VALUE})
