@@ -45,12 +45,10 @@ public class ProcessController {
 	}
 	
 	@GetMapping(path = "/{pid}", produces = {MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<ProcessEntity> search(@PathVariable String pid){
+	public Process search(@PathVariable String pid){
 		ProcessEntity pService = pRepository.getOne(pid);
-		if(pService == null) {
-			return ResponseEntity.notFound().build();
-		}
-		return ResponseEntity.ok(pService);
+		Process process = serviceP.convertProcess(pService);
+		return process;
 	}
 	
 	@PutMapping(path = "/{pid}", produces = {MediaType.APPLICATION_XML_VALUE})

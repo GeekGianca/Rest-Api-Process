@@ -8,7 +8,7 @@ import com.gksoftware.processrestapi.model.Process;
 
 public class ProcessService {
 	
-	public Process saveProcess(ProcessEntity process) {
+	public Process convertProcess(ProcessEntity process) {
 		return new Process(process.getPid(), process.getName(), process.getPriority(), process.getCharacters(), process.getCharactersReplacement(), process.getCharactersReplaced());
 	}
 	
