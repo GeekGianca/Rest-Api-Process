@@ -67,7 +67,7 @@ public class ProcessController {
 			return ResponseEntity.notFound().build();
 		}
 		pRepository.delete(pprocess);
-		return ResponseEntity.noContent().build();;
+		return ResponseEntity.noContent().build();
 	}
 	
 }
