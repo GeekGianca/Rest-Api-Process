@@ -21,8 +21,9 @@ public class ProcessEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = -8899094488583446792L;
 	
+	//@JacksonXmlProperty(isAttribute = true)
 	@Id
-	@JacksonXmlProperty(isAttribute = true)
+	@JacksonXmlProperty
 	private String pid;
 	@JacksonXmlProperty
     private String simulationProcess;
