@@ -16,7 +16,7 @@ public class ProcessList implements Serializable {
 	 * @serialVersion
 	 */
 	private static final long serialVersionUID = 1L;
-	@JacksonXmlProperty(localName = "ProcessList")
+	@JacksonXmlProperty(localName = "Process")
     @JacksonXmlElementWrapper(useWrapping = false)
 	private List<ProcessEntity> processList = new ArrayList<>();
 	
