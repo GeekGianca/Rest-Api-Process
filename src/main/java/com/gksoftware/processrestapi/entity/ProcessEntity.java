@@ -1,84 +1,150 @@
 package com.gksoftware.processrestapi.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
 @Entity
-public class ProcessEntity {
+@Table(name = "Process")
+@JacksonXmlRootElement(localName = "Process")
+public class ProcessEntity implements Serializable {
+	
+	/**
+	 * @serialVersion
+	 */
+	private static final long serialVersionUID = -8899094488583446792L;
 	
 	@Id
+	@JacksonXmlProperty(isAttribute = true)
 	private String pid;
-	@NotBlank
-	@NotNull
+	@JacksonXmlProperty
+    private String simulationProcess;
+	@JacksonXmlProperty
     private String name;
-	@NotNull
+	@JacksonXmlProperty
     private int priority;
-	@NotNull
+	@JacksonXmlProperty
     private String characters;
-	@NotNull
-    private String charactersReplacement;
-	@NotNull
+	@JacksonXmlProperty
     private String charactersReplaced;
-
-    public String getPid() {
-        return pid;
-    }
-
-    public void setPid(String pid) {
-        this.pid = pid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getPriority() {
-        return priority;
-    }
-
-    public void setPriority(int priority) {
-        this.priority = priority;
-    }
-
-    public String getCharactersReplacement() {
-        return charactersReplacement;
-    }
-
-    public void setCharactersReplacement(String characters) {
-        this.charactersReplacement = characters;
-    }
-
-    public String getCharactersReplaced() {
-        return charactersReplaced;
-    }
-
-    public void setCharactersReplaced(String charactersReplaced) {
-        this.charactersReplaced = charactersReplaced;
-    }
-
-    public String getCharacters() {
-        return characters;
-    }
-
-    public void setCharacters(String characters) {
-        this.characters = characters;
-    }
-
-    public ProcessEntity() {
-    }
-
-    public ProcessEntity(String pid, String name, int priority, String characters, String charactersReplacement, String charactersReplaced) {
-        this.pid = pid;
-        this.name = name;
-        this.priority = priority;
-        this.characters = characters;
-        this.charactersReplacement = charactersReplacement;
-        this.charactersReplaced = charactersReplaced;
-    }
+	@JacksonXmlProperty
+    private int quantum;
+	
+	public String getPid() {
+		return pid;
+	}
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+	public String getSimulationProcess() {
+		return simulationProcess;
+	}
+	public void setSimulationProcess(String simulationProcess) {
+		this.simulationProcess = simulationProcess;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getPriority() {
+		return priority;
+	}
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+	public String getCharacters() {
+		return characters;
+	}
+	public void setCharacters(String characters) {
+		this.characters = characters;
+	}
+	public String getCharactersReplaced() {
+		return charactersReplaced;
+	}
+	public void setCharactersReplaced(String charactersReplaced) {
+		this.charactersReplaced = charactersReplaced;
+	}
+	public int getQuantum() {
+		return quantum;
+	}
+	public void setQuantum(int quantum) {
+		this.quantum = quantum;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	public ProcessEntity(String pid, String simulationProcess, String name, int priority, String characters,
+			String charactersReplaced, int quantum) {
+		this.pid = pid;
+		this.simulationProcess = simulationProcess;
+		this.name = name;
+		this.priority = priority;
+		this.characters = characters;
+		this.charactersReplaced = charactersReplaced;
+		this.quantum = quantum;
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((characters == null) ? 0 : characters.hashCode());
+		result = prime * result + ((charactersReplaced == null) ? 0 : charactersReplaced.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((pid == null) ? 0 : pid.hashCode());
+		result = prime * result + priority;
+		result = prime * result + quantum;
+		result = prime * result + ((simulationProcess == null) ? 0 : simulationProcess.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProcessEntity other = (ProcessEntity) obj;
+		if (characters == null) {
+			if (other.characters != null)
+				return false;
+		} else if (!characters.equals(other.characters))
+			return false;
+		if (charactersReplaced == null) {
+			if (other.charactersReplaced != null)
+				return false;
+		} else if (!charactersReplaced.equals(other.charactersReplaced))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (pid == null) {
+			if (other.pid != null)
+				return false;
+		} else if (!pid.equals(other.pid))
+			return false;
+		if (priority != other.priority)
+			return false;
+		if (quantum != other.quantum)
+			return false;
+		if (simulationProcess == null) {
+			if (other.simulationProcess != null)
+				return false;
+		} else if (!simulationProcess.equals(other.simulationProcess))
+			return false;
+		return true;
+	}
+	
 }

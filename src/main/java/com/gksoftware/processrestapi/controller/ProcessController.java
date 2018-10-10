@@ -32,23 +32,21 @@ public class ProcessController {
 	private ProcessService serviceP = new ProcessService();
 	
 	@PostMapping(produces = {MediaType.APPLICATION_XML_VALUE})
-	public Process add(@Valid @RequestBody ProcessEntity pService) {
-		Process process = new Process(pService.getPid(), pService.getName(), pService.getPriority(), pService.getCharacters(), pService.getCharactersReplacement(), pService.getCharactersReplaced());
+	public ProcessEntity add(@Valid @RequestBody ProcessEntity pService) {
 		this.pRepository.save(pService);
-		return process;
+		return pService;
 	}
 	
 	@GetMapping(produces = {MediaType.APPLICATION_XML_VALUE})
-	public List<Process> getAll(){
-		List<Process> listProcess = serviceP.getAllProcess(pRepository.findAll());
+	public List<ProcessEntity> getAll(){
+		List<ProcessEntity> listProcess = pRepository.findAll();
 		return listProcess;
 	}
 	
 	@GetMapping(path = "/{pid}", produces = {MediaType.APPLICATION_XML_VALUE})
-	public Process search(@PathVariable String pid){
+	public ProcessEntity search(@PathVariable String pid){
 		ProcessEntity pService = pRepository.getOne(pid);
-		Process process = serviceP.convertProcess(pService);
-		return process;
+		return pService;
 	}
 	
 	@PutMapping(path = "/{pid}", produces = {MediaType.APPLICATION_XML_VALUE})
@@ -63,15 +61,13 @@ public class ProcessController {
 	}
 	
 	@DeleteMapping(path = "/{pid}", produces = {MediaType.APPLICATION_XML_VALUE})
-	public Process remover(@PathVariable String pid) {
+	public ResponseEntity<Void> remover(@PathVariable String pid) {
 		ProcessEntity pprocess = pRepository.getOne(pid);
-		Process process = serviceP.convertProcess(pprocess);
-		if (process == null) {
-			return null;
+		if (pprocess == null) {
+			return ResponseEntity.notFound().build();
 		}
 		pRepository.delete(pprocess);
-		ResponseEntity.noContent().build();
-		return process;
+		return ResponseEntity.noContent().build();;
 	}
 	
 }
