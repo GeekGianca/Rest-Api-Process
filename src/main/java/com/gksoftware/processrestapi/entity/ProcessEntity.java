@@ -93,6 +93,9 @@ public class ProcessEntity implements Serializable {
 		this.quantum = quantum;
 	}
 	
+	public ProcessEntity() {
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
