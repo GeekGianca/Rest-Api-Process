@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gksoftware.processrestapi.repository.ProcessRepository;
 import com.gksoftware.processrestapi.entity.*;
-import com.gksoftware.processrestapi.model.Process;
 import com.gksoftware.processrestapi.model.ProcessList;
 
 @RestController
